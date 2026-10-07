@@ -43,26 +43,34 @@ npm run preview         # 빌드 결과 미리보기 (http://localhost:4173)
 
 `dist/` 폴더만 정적 호스팅에 올리면 됩니다 (`base: './'`, Hash 라우팅 — 서버 설정 불필요).
 
-- **GitHub Pages**: `dist` 내용을 `gh-pages` 브랜치에 푸시
-- **기타 정적 호스팅**: dist 폴더 업로드
+### 현재 운영 중 배포 (교사용)
+
+- **주소**: https://parkdongbae.github.io/invention-teacher/
+- **저장소**: `Parkdongbae/invention-teacher` (main 브랜치 = 교사용 빌드 결과)
+
+재배포(업데이트) 절차:
+
+```powershell
+cd app; npm run build:teacher; cd ..
+cd app/dist
+git add -A; git commit -m "deploy: 교사용 빌드"; git push origin main
+```
+
+> 💡 **다른 학교 교사도 그대로 사용할 수 있어요.** 배포 주소는 공개지만, 모든 데이터는
+> 각자 기기의 브라우저(LocalStorage)에만 저장되고 구글시트 연동도 각 교사가 자기 시트
+> 웹앱 URL을 연결하는 구조라, 여러 학교가 동시에 써도 데이터가 섞이지 않습니다.
+
+- **기타 정적 호스팅**: dist 폴더 업로드 (학생용·교사용 빌드 선택은 `npm run build` / `build:teacher`)
 
 ### ⚠️ 초대 링크·QR은 반드시 배포 주소로
 
 학생 초대 QR은 앱을 연 **주소를 그대로** 담습니다. 교사용 exe(127.0.0.1:4174)나 localhost에서
 QR을 만들면 학생 기기에서 「사이트에 접근할 수 없음」이 됩니다.
 
-1. **GitHub Pages 배포 예시** (저장소 루트에서):
-   ```bash
-   cd app && npm run build:teacher && cd ..
-   git subtree push --prefix app/dist origin gh-pages
-   # 또는: cd app/dist && git init && git add -A && git commit -m deploy
-   #        git push -f https://github.com/<계정>/<저장소>.git HEAD:gh-pages
-   ```
-   배포 주소: `https://<계정>.github.io/<저장소>/`
-2. 교사는 **배포 주소**에서 교사용을 열어 QR을 만들거나,
+1. 위 **운영 중 배포 주소**에서 교사용을 열어 QR을 만들거나,
    exe를 쓸 경우 교사용 「⚙️ 학급 설정」의 **🌐 학생 접속 주소**에 배포 주소를 넣고 저장
    → QR·초대 링크가 자동으로 배포 주소로 생성됩니다.
-3. 학생 접속 주소가 비어 있고 교사 컴퓨터 주소(localhost·127.0.0.1)에서 QR을 만들면
+2. 학생 접속 주소가 비어 있고 교사 컴퓨터 주소(localhost·127.0.0.1)에서 QR을 만들면
    초대 카드 상단에 경고가 표시됩니다.
 
 학생 데이터는 **각 기기 브라우저(LocalStorage)에 저장**됩니다. 백업은 프로필 페이지의 "모든 데이터 내보내기(JSON)".
