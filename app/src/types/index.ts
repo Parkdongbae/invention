@@ -171,6 +171,8 @@ export interface TeacherConfig {
   gasUrl: string;
   classCode: string;
   className: string;
+  /** 학생이 접속할 앱 주소 (인터넷 배포 URL). 비워두면 현재 브라우저 주소를 사용 */
+  publicBaseUrl: string;
 }
 
 // ===== 발명가 =====

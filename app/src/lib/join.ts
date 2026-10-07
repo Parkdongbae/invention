@@ -32,6 +32,22 @@ export function decodeJoin(token: string): JoinInfo | null {
   }
 }
 
-export function buildJoinUrl(info: JoinInfo): string {
-  return `${location.origin}${location.pathname}#/join?t=${encodeJoin(info)}`;
+export function buildJoinUrl(info: JoinInfo, baseUrl?: string): string {
+  const token = encodeJoin(info);
+  const base = normalizePublicBase(baseUrl);
+  if (base) return `${base}#/join?t=${token}`;
+  return `${location.origin}${location.pathname}#/join?t=${token}`;
+}
+
+/** 학생 접속 주소 끝의 슬래시를 정리 (없으면 null → 현재 브라우저 주소 사용) */
+export function normalizePublicBase(baseUrl?: string): string | null {
+  const trimmed = (baseUrl ?? '').trim();
+  if (!trimmed) return null;
+  if (!/^https?:\/\//i.test(trimmed)) return null;
+  return trimmed.replace(/\/+$/, '') + '/';
+}
+
+/** 현재 브라우저 주소가 이 기기(127.0.0.1·localhost)만 열리는 주소인지 판정 */
+export function isLoopbackLocation(): boolean {
+  return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
 }

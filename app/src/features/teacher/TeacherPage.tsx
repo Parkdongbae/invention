@@ -9,7 +9,7 @@ import {
 } from '../../lib/gas';
 import { downloadCsv } from '../../lib/csv';
 import { exportPlanToPdf, renderPlanDocument } from '../../lib/pdf';
-import { buildJoinUrl } from '../../lib/join';
+import { buildJoinUrl, isLoopbackLocation, normalizePublicBase } from '../../lib/join';
 import QRCode from 'qrcode';
 import { ConfirmButton, EmptyState, Modal, Section, StarRating, toast } from '../../components/ui';
 
@@ -135,18 +135,24 @@ function planFromRow(row: GasSubmissionRow): ReceivedPlan {
   };
 }
 
-function InviteCard(props: { classCode: string; className: string; gasUrl: string }) {
+function InviteCard(props: { classCode: string; className: string; gasUrl: string; publicBaseUrl: string }) {
   const ready = props.gasUrl.trim().length > 0 && props.classCode.trim().length > 0;
+  const publicBase = useMemo(() => normalizePublicBase(props.publicBaseUrl), [props.publicBaseUrl]);
+  const loopback = useMemo(() => isLoopbackLocation(), []);
+  const localOnlyQr = ready && !publicBase && loopback;
   const joinUrl = useMemo(
     () =>
       ready
-        ? buildJoinUrl({
-            gasUrl: props.gasUrl.trim(),
-            classCode: props.classCode.trim(),
-            className: props.className.trim(),
-          })
+        ? buildJoinUrl(
+            {
+              gasUrl: props.gasUrl.trim(),
+              classCode: props.classCode.trim(),
+              className: props.className.trim(),
+            },
+            publicBase ?? undefined,
+          )
         : '',
-    [ready, props.classCode, props.className, props.gasUrl],
+    [ready, props.classCode, props.className, props.gasUrl, publicBase],
   );
   const [qr, setQr] = useState('');
   const [qrBig, setQrBig] = useState('');
@@ -190,6 +196,20 @@ function InviteCard(props: { classCode: string; className: string; gasUrl: strin
 
   return (
     <div className="card">
+      {localOnlyQr && (
+        <div
+          className="card card-tight"
+          style={{ background: 'var(--accent-soft)', borderColor: 'var(--danger)', marginBottom: 14 }}
+        >
+          <p className="muted" style={{ margin: 0 }}>
+            <strong style={{ color: 'var(--danger)' }}>⚠️ 이 링크·QR은 교사 컴퓨터에서만 열려요.</strong>{' '}
+            지금 주소({location.origin})는 이 PC 안에서만 접속되는 주소라, 학생 기기에서는 스캔해도
+            「사이트에 접근할 수 없음」이 떠요. 인터넷에 배포한 앱 주소(GitHub Pages 등)를 위
+            「⚙️ 학급 설정」의 <strong>학생 접속 주소</strong>에 넣어 저장하거나, 배포 주소에서 교사용을
+            열어 주세요.
+          </p>
+        </div>
+      )}
       <div className="grid" style={{ gridTemplateColumns: 'minmax(0,1fr) auto', alignItems: 'center', gap: 18 }}>
         <div className="col" style={{ gap: 8 }}>
           <div>
@@ -235,9 +255,16 @@ function InviteCard(props: { classCode: string; className: string; gasUrl: strin
             alt="큰 초대 QR 코드"
             style={{ width: 'min(420px, 80vw)', borderRadius: 16, border: '1px solid var(--line)' }}
           />
-          <p className="muted" style={{ marginTop: 12 }}>
-            학생이 스캔하면 우리 반에 자동 연결돼요. 프로젝터·전자칠판에 띄워 활용해 보세요.
-          </p>
+          {localOnlyQr ? (
+            <p className="muted" style={{ marginTop: 12 }}>
+              <strong style={{ color: 'var(--danger)' }}>⚠️ 학생이 스캔해도 열리지 않는 QR이에요.</strong>{' '}
+              「학생 접속 주소」에 인터넷 배포 주소를 저장한 뒤 다시 띄워 주세요.
+            </p>
+          ) : (
+            <p className="muted" style={{ marginTop: 12 }}>
+              학생이 스캔하면 우리 반에 자동 연결돼요. 프로젝터·전자칠판에 띄워 활용해 보세요.
+            </p>
+          )}
           <button className="btn btn-ghost" onClick={() => setQrBig('')}>
             닫기
           </button>
@@ -262,7 +289,7 @@ const removeTeacherClass = useAppStore((s) => s.removeTeacherClass);
   // (a) 설정 (로컬 폼 → 저장 버튼)
   const [cfg, setCfg] = useState(() => {
     const t = useAppStore.getState().teacher;
-    return { classCode: t.classCode, className: t.className, gasUrl: t.gasUrl };
+    return { classCode: t.classCode, className: t.className, gasUrl: t.gasUrl, publicBaseUrl: t.publicBaseUrl ?? '' };
   });
 
   // (b) 구글시트 연동
@@ -320,7 +347,12 @@ const [selectedClass, setSelectedClass] = useState(
       return;
     }
     setTeacherConfig({ classCode: target.classCode, className: target.className, gasUrl: target.gasUrl });
-    setCfg({ classCode: target.classCode, className: target.className, gasUrl: target.gasUrl });
+    setCfg((prev) => ({
+      ...prev,
+      classCode: target.classCode,
+      className: target.className,
+      gasUrl: target.gasUrl,
+    }));
     toast(`${target.className || target.classCode} 반으로 전환했어요!`, '🔄');
   };
 
@@ -693,6 +725,19 @@ const [selectedClass, setSelectedClass] = useState(
               />
             </div>
           </div>
+          <div style={{ marginBottom: 12 }}>
+            <label className="field-label">🌐 학생 접속 주소 (선택 — QR·초대 링크용)</label>
+            <input
+              className="input"
+              value={cfg.publicBaseUrl ?? ''}
+              placeholder="예: https://내아이디.github.io/invention/  (비워두면 지금 브라우저 주소 사용)"
+              onChange={(e) => setCfg({ ...cfg, publicBaseUrl: e.target.value })}
+            />
+            <p className="tiny" style={{ marginTop: 6 }}>
+              교사용 exe(127.0.0.1)나 localhost로 앱을 열 때는 이 칸에 <strong>인터넷에 배포한 주소</strong>를
+              넣어 주세요. 비워 두면 QR이 교사 컴퓨터 주소를 가리켜 학생이 접속할 수 없어요.
+            </p>
+          </div>
           <div className="row-wrap">
             <button className="btn btn-primary btn-sm" onClick={saveCfg}>
               💾 설정 저장
@@ -826,7 +871,12 @@ const [selectedClass, setSelectedClass] = useState(
         title="🔗 학생 초대 링크 · QR"
         sub="학생이 이 링크를 열거나 QR을 스캔하면 우리 반에 자동 연결돼요. URL을 직접 입력할 필요가 없어요."
       >
-        <InviteCard classCode={teacher.classCode} className={teacher.className} gasUrl={teacher.gasUrl} />
+        <InviteCard
+          classCode={teacher.classCode}
+          className={teacher.className}
+          gasUrl={teacher.gasUrl}
+          publicBaseUrl={teacher.publicBaseUrl ?? ''}
+        />
       </Section>
 
       {/* (c) 받은 계획서 */}

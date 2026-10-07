@@ -105,7 +105,7 @@ export const useAppStore = create<AppState>()(
       plans: [],
       gameScores: [],
       pending: [],
-      teacher: { gasUrl: '', classCode: '', className: '', feedback: [], presentationOrders: [] },
+      teacher: { gasUrl: '', classCode: '', className: '', publicBaseUrl: '', feedback: [], presentationOrders: [] },
       teacherClasses: [],
       exploredAwardIds: [],
       sdgsExplored: false,
