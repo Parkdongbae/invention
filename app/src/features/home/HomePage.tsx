@@ -165,6 +165,21 @@ export default function HomePage() {
           <p style={{ fontSize: 15, fontWeight: 700, lineHeight: 1.6 }}>“{quote}”</p>
         </div>
       </section>
+      {/* 사용 설명서 (학생용) */}
+      <a
+        className="card row"
+        href="./manual-student.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        <span style={{ fontSize: 24 }}>📖</span>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontWeight: 800, fontSize: 14.5 }}>사용 설명서 (학생용)</div>
+          <div className="tiny">메뉴 사용법이 궁금하면 열어보세요! (PDF)</div>
+        </div>
+        <span className="tiny">열기 ›</span>
+      </a>
     </div>
   );
 }

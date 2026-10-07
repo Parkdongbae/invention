@@ -32,7 +32,8 @@ const NAV_ITEMS: { to: string; icon: string; label: string; tab?: boolean }[] = 
   { to: '/notes', icon: '📓', label: '발명 노트' },
   { to: '/profile', icon: '🎖️', label: '내 발명가' },
   { to: '/report', icon: '🚨', label: '오류 신고' },
-  { to: '/teacher', icon: '🧑‍🏫', label: '교사용' },
+  // 교사용은 --mode teacher 빌드(교사용 프로그램·교사 배포판)에만 표시
+  ...(import.meta.env.MODE === 'teacher' ? [{ to: '/teacher', icon: '🧑‍🏫', label: '교사용' as const }] : []),
 ];
 
 function Loading() {

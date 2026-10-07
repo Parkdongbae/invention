@@ -33,9 +33,10 @@ SSI(학생발명아이디어경진대회) 수상작 **1,199작**의 발명 10계
 ```bash
 cd app
 npm install
-npm run dev      # 개발 서버 (http://localhost:5173)
-npm run build    # 프로덕션 빌드 → dist/
-npm run preview  # 빌드 결과 미리보기 (http://localhost:4173)
+npm run dev             # 개발 서버 (http://localhost:5173)
+npm run build           # 학생용 빌드 → dist/  (교사용 메뉴 숨김)
+npm run build:teacher   # 교사용 빌드 → dist/  (교사용 메뉴 표시)
+npm run preview         # 빌드 결과 미리보기 (http://localhost:4173)
 ```
 
 ## 배포
@@ -60,13 +61,23 @@ npm run preview  # 빌드 결과 미리보기 (http://localhost:4173)
 
 ## 교사용 단독 실행 파일 (exe)
 
-```bash
-powershell -ExecutionPolicy Bypass -File teacher-exe\build.ps1   # app/dist 빌드 후 실행
+```powershell
+cd app; npm run build:teacher; cd ..
+powershell -ExecutionPolicy Bypass -File teacher-exe\build.ps1   # 교사용 빌드를 exe에 내장
 ```
 
-- `teacher-exe/발명도우미_교사용.exe` (약 2MB) — 앱 전체를 내장한 단독 실행 파일
+- `teacher-exe/발명도우미_교사용.exe` — 앱 전체를 내장한 단독 실행 파일 (**교사용 메뉴 포함 빌드**)
 - 더블클릭 → 로컬 서버(127.0.0.1:4174) 시작 + 브라우저 자동 오픈, 검은 창을 닫으면 종료
 - Windows 기본 .NET Framework(csc)로 컴파일 — 설치·인터넷 불필요
+
+## 사용 설명서
+
+| 구분 | 파일 |
+|---|---|
+| 🎒 학생용 | `발명도우미_사용설명서_학생용.pdf` (학생용 앱 홈 화면에도 내장) |
+| 🧑‍🏫 교사용 | `발명도우미_사용설명서_교사용.pdf` (교사용 대시보드 상단 링크) |
+
+원본: `manual/student.html`, `manual/teacher.html` (수정 후 Edge headless로 PDF 재생성)
 
 ## 데이터 파이프라인 (참고)
 

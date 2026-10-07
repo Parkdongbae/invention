@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:teacher": "tsc -b && vite build --mode teacher",
     "preview": "vite preview"
   },
   "dependencies": {

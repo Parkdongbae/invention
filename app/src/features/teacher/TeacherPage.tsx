@@ -149,6 +149,15 @@ function InviteCard(props: { classCode: string; className: string; gasUrl: strin
     [ready, props.classCode, props.className, props.gasUrl],
   );
   const [qr, setQr] = useState('');
+  const [qrBig, setQrBig] = useState('');
+
+  const openBigQr = async () => {
+    try {
+      setQrBig(await QRCode.toDataURL(joinUrl, { width: 560, margin: 2 }));
+    } catch {
+      setQrBig(qr);
+    }
+  };
 
   useEffect(() => {
     if (!joinUrl) {
@@ -212,10 +221,28 @@ function InviteCard(props: { classCode: string; className: string; gasUrl: strin
             alt="초대 QR 코드"
             width={132}
             height={132}
-            style={{ borderRadius: 12, border: '1px solid var(--line)' }}
+            onClick={openBigQr}
+            title="클릭하면 크게 볼 수 있어요"
+            style={{ borderRadius: 12, border: '1px solid var(--line)', cursor: 'zoom-in' }}
           />
         )}
       </div>
+
+      <Modal open={qrBig !== ''} onClose={() => setQrBig('')} title="📱 학생 초대 QR 코드">
+        <div className="center">
+          <img
+            src={qrBig}
+            alt="큰 초대 QR 코드"
+            style={{ width: 'min(420px, 80vw)', borderRadius: 16, border: '1px solid var(--line)' }}
+          />
+          <p className="muted" style={{ marginTop: 12 }}>
+            학생이 스캔하면 우리 반에 자동 연결돼요. 프로젝터·전자칠판에 띄워 활용해 보세요.
+          </p>
+          <button className="btn btn-ghost" onClick={() => setQrBig('')}>
+            닫기
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
@@ -623,6 +650,15 @@ const [selectedClass, setSelectedClass] = useState(
             저장됩니다. 학생 데이터는 각 학생의 기기에 따로 저장되며, 학생이 「선생님께 보내기」로
             전송한 계획서가 구글시트와 이 기기의 기록에 쌓입니다.
           </p>
+          <a
+            className="btn btn-sm"
+            style={{ marginTop: 8 }}
+            href="./manual-teacher.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📖 교사용 설명서 열기 (PDF)
+          </a>
         </div>
 
         {/* (a) 설정 */}
