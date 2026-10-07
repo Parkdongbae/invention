@@ -1,0 +1,40 @@
+{
+  "total": 1199,
+  "byYear": {
+    "2019": 310,
+    "2023": 299,
+    "2024": 290,
+    "2025": 300
+  },
+  "byAward": {
+    "대통령상": 4,
+    "최우수상": 40,
+    "특상": 199,
+    "우수상": 406,
+    "장려상": 548,
+    "국무총리상": 2
+  },
+  "who": {
+    "others": 1092,
+    "pedestrian": 23,
+    "student": 29,
+    "child": 15,
+    "disabled": 44,
+    "teacher": 3
+  },
+  "where": {
+    "others": 973,
+    "home": 78,
+    "school_classroom": 78,
+    "street_infra": 121,
+    "lab_science": 21
+  },
+  "what": {
+    "safety": 180,
+    "door_access": 48,
+    "daily_goods": 229,
+    "others": 687,
+    "environment_waste": 105,
+    "health_sense": 36
+  }
+}

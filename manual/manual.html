@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>발명 도우미 사용 설명서</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Pretendard', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    color: #23272f; margin: 0; line-height: 1.65; font-size: 11.5pt;
+  }
+  .cover { text-align: center; padding-top: 130px; page-break-after: always; }
+  .cover .logo { font-size: 54pt; }
+  .cover h1 { font-size: 30pt; margin: 14px 0 6px; letter-spacing: 2px; }
+  .cover .sub { color: #5b6270; font-size: 13pt; }
+  .cover .badge-box { margin-top: 46px; display: inline-block; border: 2px solid #4f46e5; border-radius: 14px; padding: 16px 30px; color: #3730a3; font-weight: 700; }
+  .cover .foot { margin-top: 90px; color: #9aa1ad; font-size: 10pt; }
+
+  h2 {
+    font-size: 17pt; color: #3730a3; border-bottom: 3px solid #4f46e5;
+    padding-bottom: 6px; margin: 0 0 14px;
+    page-break-before: always; page-break-after: avoid;
+  }
+  h2 .no { background: #4f46e5; color: #fff; border-radius: 8px; padding: 2px 12px; margin-right: 10px; font-size: 14pt; }
+  h3 { font-size: 13pt; margin: 20px 0 8px; page-break-after: avoid; }
+  h3::before { content: '■ '; color: #4f46e5; }
+  p { margin: 6px 0; }
+  .tip { background: #eef2ff; border-left: 4px solid #4f46e5; border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 10px 0; page-break-inside: avoid; }
+  .warn { background: #fff0ee; border-left: 4px solid #ff6b5e; border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 10px 0; page-break-inside: avoid; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; page-break-inside: avoid; }
+  th, td { border: 1px solid #d9d4c8; padding: 7px 10px; text-align: left; font-size: 10.5pt; }
+  th { background: #f4f1ea; }
+  ol li, ul li { margin: 4px 0; }
+  .step { display: inline-block; background: #4f46e5; color: #fff; border-radius: 50%; width: 22px; height: 22px; text-align: center; line-height: 22px; font-weight: 800; font-size: 10.5pt; margin-right: 8px; }
+  .k { background: #fef3c7; border-radius: 4px; padding: 0 5px; font-weight: 700; }
+  code { background: #f4f1ea; border-radius: 4px; padding: 1px 6px; font-size: 10pt; }
+  .toc { page-break-after: always; padding-top: 30px; }
+  .toc h2 { page-break-before: auto; }
+  .toc li { margin: 8px 0; font-size: 12.5pt; }
+  .flow { background: #faf7f2; border: 1.5px dashed #c9c2b2; border-radius: 12px; padding: 12px 16px; text-align: center; font-weight: 700; margin: 12px 0; page-break-inside: avoid; }
+  .footer-note { color: #9aa1ad; font-size: 9.5pt; text-align: center; margin-top: 30px; }
+</style>
+</head>
+<body>
+
+<!-- 표지 -->
+<div class="cover">
+  <div class="logo">💡</div>
+  <h1>발명 도우미</h1>
+  <div class="sub">일상의 불편에서 발명 아이디어를 찾는 중학교 기술 수업 도구</div>
+  <div class="badge-box">사용 설명서 · 학생용 + 교사용</div>
+  <div class="foot">SSI 수상작 1,199작 데이터 내장 · 버전 1.1</div>
+</div>
+
+<!-- 목차 -->
+<div class="toc">
+  <h2>목차</h2>
+  <ol>
+    <li>시작하기 — 앱을 여는 3가지 방법</li>
+    <li>학생 사용 가이드 (문제 발견 → 계획서 제출까지)</li>
+    <li>교사 사용 가이드 (구글시트 연동 · 초대 링크 · 받은 계획서)</li>
+    <li>교사용 프로그램(exe) 실행 방법</li>
+    <li>자주 묻는 질문</li>
+  </ol>
+  <div class="flow">🔎 문제 발견 → 💡 아이디어 → 🏆 수상작 탐구 → 📄 발명계획서 → 📨 선생님께 제출</div>
+</div>
+
+<!-- 1장 -->
+<h2><span class="no">1</span>시작하기</h2>
+<h3>앱을 여는 방법</h3>
+<table>
+  <tr><th>방법</th><th>하는 법</th><th>이럴 때 사용</th></tr>
+  <tr><td>① 인터넷 주소 <strong>(권장)</strong></td><td>선생님이 알려준 앱 주소를 크롬·엣지로 열기</td><td>학생이 각자 기기(PC·태블릿·휴대폰)에서 쓸 때</td></tr>
+  <tr><td>② 파일로 열기</td><td><code>app/dist/index.html</code> 더블클릭</td><td>인터넷이 안 되는 컴퓨터실</td></tr>
+  <tr><td>③ 교사용 프로그램</td><td><code>발명도우미_교사용.exe</code> 더블클릭</td><td>교사 노트북에서 발표·관리용으로 쓸 때 (4장 참고)</td></tr>
+</table>
+<div class="tip">💡 앱은 설치가 필요 없습니다. 인터넷 주소만 열면 바로 동작해요. 처음 한 번만 실행하면 이후 오프라인에서도 대부분의 기능이 동작합니다.</div>
+
+<h3>화면 구성</h3>
+<table>
+  <tr><th>화면</th><th>하는 일</th></tr>
+  <tr><td>🔎 문제 발견</td><td>누가·어디서·무엇을 골라 문제 문장 만들기</td></tr>
+  <tr><td>💡 아이디어</td><td>발명 10계명·SCAMPER·랜덤 스파크로 아이디어 키우기</td></tr>
+  <tr><td>🏆 수상작</td><td>SSI 수상작 1,199작 검색·필터·상세 분석</td></tr>
+  <tr><td>🌏 SDGs / 🃏 카드게임 / 📜 특허 검색</td><td>주제 확장 학습과 놀이, 실제 특허 검색 연결</td></tr>
+  <tr><td>📄 발명계획서 / 📓 발명 노트</td><td>계획서 작성·PDF 저장·선생님께 제출, 자유 기록</td></tr>
+  <tr><td>🎖️ 내 발명가</td><td>레벨·도장·통계·데이터 백업</td></tr>
+  <tr><td>🚨 오류 신고</td><td>화면의 잘못된 정보를 선생님께 알리기</td></tr>
+  <tr><td>🧑‍🏫 교사용</td><td>학급 관리, 구글시트 연동, 발표·피드백 (3장)</td></tr>
+</table>
+<div class="tip">💡 오른쪽 위 <span class="k">🔊</span> 버튼으로 효과음을 끄거나 켤 수 있어요. 저장·도장·게임 정답 때 소리가 납니다.</div>
+
+<!-- 2장 -->
+<h2><span class="no">2</span>학생 사용 가이드</h2>
+<h3>① 문제 발견 — 발명의 씨앗 찾기</h3>
+<ol>
+  <li><span class="step">1</span><strong>누구를 위해?</strong> — 불편을 겪는 사람을 고르세요. (학생, 장애가 있는 사람, 어린이…)</li>
+  <li><span class="step">2</span><strong>어디서?</strong> — 불편한 장소를 고르세요. (학교·교실, 집·주방, 길·도로…)</li>
+  <li><span class="step">3</span><strong>무엇이 문제?</strong> — 문제 종류와 얼마나 불편한지 고르면 <span class="k">문제 문장이 자동으로</span> 만들어져요. 문장은 자유롭게 고칠 수 있어요.</li>
+  <li><span class="step">4</span><span class="k">💾 문제 발견 저장하기</span>를 누르면 XP+10과 <strong>도장</strong>이 지급돼요.</li>
+</ol>
+<div class="tip">💡 문제가 SDGs 목표와 관련 있으면 지구 목표 카드가 나타나요. 눌러서 연결해 두면 SDGs 탐구와 이어집니다.</div>
+
+<h3>② 아이디어 공방 — 아이디어 키우기</h3>
+<ul>
+  <li><strong>🧭 발명 10계명</strong>: 무작위 계명 카드가 질문을 던져요. 메모도 가능해요.</li>
+  <li><strong>🧩 SCAMPER</strong>: 7장의 카드(대체·합치기·응용·크기·용도·없애기·뒤집기)를 눌러 메모를 남기세요.</li>
+  <li><strong>💥 랜덤 스파크</strong>: 버튼 한 번으로 "누가+어디서+무엇을+계명+SCAMPER" 조합 씨앗이 팝! 비슷한 실제 수상작 예시도 함께 보여줘요.</li>
+  <li>제목과 한 줄 요약을 쓰고 <span class="k">💾 아이디어 저장</span> — 키워드는 자동으로 뽑아줘요. 5W1H를 6개 모두 채우면 도장!</li>
+</ul>
+
+<h3>③ 수상작 탐구 — 실제 수상작에서 배우기</h3>
+<ul>
+  <li>검색창에 <span class="k">우산</span>, <span class="k">배수로</span> 등 키워드를 넣거나, 연도·수상·10계명·카테고리로 필터하세요.</li>
+  <li>카드를 누르면 <strong>수상등급·작품 정보 · 발명 10계명 해석 · 5W1H 분석</strong>이 나타나요.</li>
+  <li>상세 화면의 <span class="k">📜 특허 검색해 보기</span>를 누르면 제목 키워드로 특허 검색까지 연결돼요.</li>
+</ul>
+
+<h3>④ 발명계획서 작성 · PDF · 제출</h3>
+<ol>
+  <li>아이디어 목록의 <span class="k">발명계획서로 이어가기</span>를 누르면 내용이 자동으로 채워져요.</li>
+  <li>학번·이름·반을 쓰고 15개 항목을 채우면 <strong>진행률 게이지</strong>가 100%가 돼요.</li>
+  <li><span class="k">📄 PDF 내보내기</span> → <code>학번이름_발명계획서.pdf</code> 파일로 저장! (발명가 인증 도장 포함)</li>
+  <li>우리 반에 연결된 상태라면 <span class="k">📨 선생님께 보내기</span>로 제출 — 선생님 구글시트에 자동 기록돼요.</li>
+</ol>
+<div class="warn">⚠️ 제출이 실패하면 기기에 <strong>대기</strong>로 저장됩니다. 인터넷이 연결되면 다시 <strong>보내기</strong>를 누르세요. 학번·이름을 채우지 않으면 PDF·제출이 막혀요.</div>
+
+<h3>⑤ 그 외 기능</h3>
+<ul>
+  <li><strong>📓 발명 노트</strong>: 자유 기록. 800ms 후 자동 저장, 마크다운 파일로 내보내기 가능.</li>
+  <li><strong>🃏 카드게임</strong>: 역사 속 발명 이야기로 10계명 맞히기 — XP와 콤보가 쌓여요.</li>
+  <li><strong>🧑‍🔬 발명가 게임</strong>: 발명가 119명(한국 24명) 추리 퀴즈·발명품 퀴즈·도감. 외국 발명가는 <code>이름(한글)</code>로 표시되고, 도감에서 <strong>위키피디아 링크</strong>로 더 공부할 수 있어요.</li>
+  <li><strong>🚨 오류 신고</strong>: 화면에서 잘못된 정보를 발견하면 학번·이름·어느 화면인지 적어 신고하세요. 선생님 구글시트에 기록됩니다.</li>
+  <li><strong>🎖️ 내 발명가</strong>: 레벨(견습생→마스터), 도장 16종 수집, <span class="k">모든 데이터 내보내기(JSON)</span>로 백업.</li>
+</ul>
+
+<!-- 3장 -->
+<h2><span class="no">3</span>교사 사용 가이드</h2>
+<h3>① 처음 설정 (1분)</h3>
+<ol>
+  <li><span class="step">1</span><strong>교사용</strong> 메뉴 → <span class="k">학급 코드</span>(예: 2-3)와 <span class="k">학급 이름</span> 입력 → 저장.</li>
+  <li><span class="step">2</span>아래 <strong>구글시트 연동</strong> 진행 (없어도 발표 순서·피드백은 바로 쓸 수 있어요).</li>
+</ol>
+
+<h3>② 구글시트 연동 (학생 제출물 자동 수집)</h3>
+<ol>
+  <li><span class="step">1</span><a href="https://sheets.new">sheets.new</a>에서 새 구글시트 만들기</li>
+  <li><span class="step">2</span>확장 프로그램 → <strong>Apps Script</strong> 열기</li>
+  <li><span class="step">3</span>교사용 화면의 <span class="k">▼ 펼치기</span>에 있는 스크립트를 <strong>복사해 전체 붙여넣기</strong></li>
+  <li><span class="step">4</span>배포 → 새 배포 → 유형 <strong>웹앱</strong>, 다음 사용자로 실행: <strong>나</strong>, 액세스 권한: <strong>모든 사용자</strong></li>
+  <li><span class="step">5</span>만들어진 <strong>웹앱 URL</strong>(https://script.google.com/…)을 교사용 설정에 붙여넣고 저장</li>
+  <li><span class="step">6</span><span class="k">🔌 연결 테스트</span>로 확인 — 시트에 <code>{학급코드}_data</code> 시트가 생기면 성공</li>
+</ol>
+<div class="warn">⚠️ 스크립트를 수정했다면 배포 → <strong>배포 관리 → 새 버전 배포</strong>를 해야 적용됩니다.</div>
+
+<h3>③ 학생 초대 링크 · QR — 학생 연결 방법</h3>
+<p>연동이 끝나면 <span class="k">🔗 학생 초대 링크 · QR</span> 카드에 자동으로 링크와 QR이 만들어집니다.</p>
+<table>
+  <tr><th>학생 기기</th><th>연결 방법</th></tr>
+  <tr><td>PC·태블릿 (크롬/엣지)</td><td>알려준 <strong>초대 링크 클릭</strong> → 「우리 반에 연결하기」 버튼 한 번</td></tr>
+  <tr><td>휴대폰·태블릿 카메라</td><td><strong>QR 스캔</strong> → 같은 화면에서 연결</td></tr>
+  <tr><td>링크를 못 쓰는 상황</td><td>학생이 발명계획서 → <strong>선생님께 보내기</strong> → URL 직접 붙여넣기</td></tr>
+</table>
+<div class="tip">💡 학생은 GAS 주소를 입력할 필요가 전혀 없습니다. 링크 안에 연결 정보가 담겨 있어요. 학생 화면에는 <strong>「🏫 ○○반 연결됨」 배지</strong>가 표시되고, 배지가 있으면 제출 준비 완료입니다.</div>
+
+<h3>④ 받은 발명계획서 확인</h3>
+<ul>
+  <li><strong>📥 받은 발명계획서</strong> 목록의 카드를 누르면 <strong>계획서 전체 내용</strong>이 화면에 나타나요.</li>
+  <li><span class="k">🔄 구글시트에서 불러오기</span>를 누르면 <strong>모든 학생 기기</strong>에서 제출된 계획서를 시트에서 가져와 모아 보여줍니다 (출처 뱃지: 구글시트/이 기기).</li>
+  <li>보기 화면에서 <span class="k">📄 PDF로 저장</span>하면 그 계획서를 교사가 파일로 보관할 수 있어요.</li>
+  <li><span class="k">📤 CSV</span>로 목록을 엑셀용 파일로 내보낼 수도 있습니다.</li>
+</ul>
+
+<h3>⑤ 발표 순서 · 피드백</h3>
+<ul>
+  <li><strong>🎲 발표 순서</strong>: 이름을 한 줄에 한 명씩 넣고 <span class="k">순서 섞기</span> → <span class="k">프레젠테이션 모드</span>로 전체 화면 발표 진행(다음 버튼으로 명단 넘기기).</li>
+  <li><strong>📝 피드백</strong>: 발표자·제목·5개 항목(창의성·기능성·실용성·경제성·심미성) 별점·코멘트를 기록 → CSV 내보내기 지원.</li>
+</ul>
+
+<h3>⑥ 여러 반 수업하기 (학급 전환)</h3>
+<ol>
+  <li><span class="step">1</span>2-1반 정보를 넣고 <span class="k">💾 설정 저장</span> — 전환 목록에 자동 저장돼요.</li>
+  <li><span class="step">2</span>2-2반 정보로 바꿔 다시 <span class="k">💾 설정 저장</span>.</li>
+  <li><span class="step">3</span>수업 바꿀 때는 <strong>⚙️ 학급 설정</strong>의 <span class="k">저장된 반 전환</span> 리스트박스에서 반을 고르고 <span class="k">▶ 이 반으로 전환</span> 클릭!</li>
+  <li><span class="step">4</span>필요 없는 반은 <span class="k">🗑 반 삭제</span>로 목록에서 제거할 수 있어요.</li>
+</ol>
+<div class="tip">💡 전환하면 이후 학생 제출이 새 학급 코드로 기록됩니다. 이미 받은 계획서·신고는 그대로 보존돼요.</div>
+
+<h3>⑦ 오류 신고 확인</h3>
+<ul>
+  <li>학생이 <strong>🚨 오류 신고</strong> 메뉴에서 보낸 내용은 <span class="k">🚨 오류 신고 확인</span>에서 볼 수 있어요.</li>
+  <li><span class="k">🔄 시트에서 불러오기</span>를 누르면 모든 학생 기기의 신고가 <strong>학급 구분 없이</strong> 구글시트 <code>공통_오류신고</code> 시트에서 모아집니다 (학번·이름·화면·내용).</li>
+  <li>카드를 누르면 신고 내용 전문 보기·복사, <span class="k">📤 CSV</span>로 내보내기가 가능해요.</li>
+</ul>
+
+<!-- 4장 -->
+<h2><span class="no">4</span>교사용 프로그램(exe) 실행 방법</h2>
+<p><code>발명도우미_교사용.exe</code>는 앱 전체가 안에 담긴 <strong>단독 실행 파일</strong>입니다. 설치·인터넷 없이 노트북에서 바로 실행할 수 있어요.</p>
+<ol>
+  <li><span class="step">1</span><code>발명도우미_교사용.exe</code> 더블클릭 → <strong>검은 창(서버)</strong>이 열립니다.</li>
+  <li><span class="step">2</span>몇 초 후 기본 브라우저가 자동으로 열립니다. (주소: <code>http://127.0.0.1:4174</code>)</li>
+  <li><span class="step">3</span>앱을 다 썼으면 <strong>검은 창을 닫으면</strong> 서버도 꺼집니다.</li>
+</ol>
+<div class="warn">⚠️ 첫 실행 시 Windows 보안 경고가 뜰 수 있어요. <strong>추가 정보 → 실행</strong>을 눌러주세요. (네트워크가 아닌 내 컴퓨터 안에서만 동작합니다)</div>
+<div class="tip">💡 exe 안에서 만든 교사용 데이터도 브라우저에 저장됩니다. 학생 초대 링크는 exe 주소(127.0.0.1) 기준으로 만들어지므로, 학생이 인터넷 주소로 앱을 쓴다면 학생용 앱 화면 안의 URL 붙여넣기 방법을 사용하세요.</div>
+
+<!-- 5장 -->
+<h2><span class="no">5</span>자주 묻는 질문</h2>
+<table>
+  <tr><th>질문</th><th>답변</th></tr>
+  <tr><td>내 데이터는 어디에 저장되나요?</td><td>각 기기의 브라우저 안(LocalStorage)에 저장됩니다. 서버가 없어서 기기를 바꾸면 데이터가 따로예요. 🎖️ 내 발명가 → <strong>모든 데이터 내보내기(JSON)</strong>로 백업하세요.</td></tr>
+  <tr><td>효과음이 거슬려요</td><td>오른쪽 위 <strong>🔊</strong> 버튼으로 끌 수 있어요. 설정은 기기에 저장됩니다.</td></tr>
+  <tr><td>「선생님께 보내기」가 실패해요</td><td>① 인터넷 연결 확인 ② 교사용의 웹앱 URL이 정확한지 확인 ③ 그래도 안 되면 기기에 <strong>대기</strong>로 남으니 나중에 다시 <strong>보내기</strong>를 누르세요.</td></tr>
+  <tr><td>학생이 다른 반 링크를 열었어요</td><td>학생이 새 초대 링크를 다시 열어 연결하면 됩니다. 가장 마지막에 연결한 반으로 제출돼요.</td></tr>
+  <tr><td>시트에서 불러오기가 실패해요</td><td>① 교사용 설정의 URL 저장 여부 ② GAS가 <strong>웹앱</strong>으로 배포되어 있는지 ③ 스크립트 수정 후 <strong>새 버전 배포</strong> 여부를 확인하세요.</td></tr>
+  <tr><td>수상작 데이터는 뭔가요?</td><td>2019~2025 SSI(학생발명아이디어경진대회) 수상작 1,199작을 발명 10계명·5W1H로 분석해 넣은 교육용 데이터예요.</td></tr>
+</table>
+
+<div class="footer-note">발명 도우미 사용 설명서 · 중학교 기술 수업용 · 본 문서는 발명 도우미 웹앱과 함께 배포됩니다</div>
+
+</body>
+</html>

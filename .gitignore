@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.exe
+*.log
+.playwright-mcp/
+.codegraph/
+.omo/
+teacher-exe/GeneratedResources.cs
