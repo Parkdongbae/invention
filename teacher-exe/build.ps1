@@ -12,8 +12,8 @@ $outDir = $PSScriptRoot
 
 if (-not (Test-Path $dist)) { throw "app\dist가 없습니다. 먼저 'npm run build'를 실행하세요." }
 
-# 1) dist 파일 스캔 → 임베디드 리소스 인자 + 매핑 코드 생성
-$files = Get-ChildItem $dist -Recurse -File | Sort-Object FullName
+# 1) dist 파일 스캔 → 임베디드 리소스 인자 + 매핑 코드 생성 (.git 제외 — 배포용 저장소가 dist 안에 있을 수 있음)
+$files = Get-ChildItem $dist -Recurse -File | Where-Object { $_.FullName -notmatch '[\\/]\.git[\\/]' } | Sort-Object FullName
 $distPath = (Resolve-Path $dist).Path
 $resArgs = @()
 $names = @()
