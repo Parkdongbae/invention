@@ -204,9 +204,9 @@ function InviteCard(props: { classCode: string; className: string; gasUrl: strin
           <p className="muted" style={{ margin: 0 }}>
             <strong style={{ color: 'var(--danger)' }}>⚠️ 이 링크·QR은 교사 컴퓨터에서만 열려요.</strong>{' '}
             지금 주소({location.origin})는 이 PC 안에서만 접속되는 주소라, 학생 기기에서는 스캔해도
-            「사이트에 접근할 수 없음」이 떠요. 인터넷에 배포한 앱 주소(GitHub Pages 등)를 위
-            「⚙️ 학급 설정」의 <strong>학생 접속 주소</strong>에 넣어 저장하거나, 배포 주소에서 교사용을
-            열어 주세요.
+            「사이트에 접근할 수 없음」이 떠요. <strong>학생용 앱 주소</strong>(예:{' '}
+            <code>https://invention-ecru.vercel.app/</code>)를 위 「⚙️ 학급 설정」의{' '}
+            <strong>학생 접속 주소</strong>에 넣어 저장하거나, 인터넷 배포 주소에서 교사용을 열어 주세요.
           </p>
         </div>
       )}
@@ -730,12 +730,14 @@ const [selectedClass, setSelectedClass] = useState(
             <input
               className="input"
               value={cfg.publicBaseUrl ?? ''}
-              placeholder="예: https://내아이디.github.io/invention/  (비워두면 지금 브라우저 주소 사용)"
+              placeholder="예: https://invention-ecru.vercel.app/  (비워두면 지금 브라우저 주소 사용)"
               onChange={(e) => setCfg({ ...cfg, publicBaseUrl: e.target.value })}
             />
             <p className="tiny" style={{ marginTop: 6 }}>
-              교사용 exe(127.0.0.1)나 localhost로 앱을 열 때는 이 칸에 <strong>인터넷에 배포한 주소</strong>를
-              넣어 주세요. 비워 두면 QR이 교사 컴퓨터 주소를 가리켜 학생이 접속할 수 없어요.
+              QR·초대 링크는 <strong>학생이 접속할 주소</strong>를 가리켜야 해요. 교사용 exe(127.0.0.1)나
+              localhost로 앱을 열 때는 이 칸에 <strong>학생용 앱 주소</strong>(예:{' '}
+              <code>https://invention-ecru.vercel.app/</code>)를 넣어 저장하세요. 비워 두면 QR이 교사
+              컴퓨터 주소를 가리켜 학생이 접속할 수 없어요.
             </p>
           </div>
           <div className="row-wrap">

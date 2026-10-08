@@ -43,12 +43,12 @@ npm run preview         # 빌드 결과 미리보기 (http://localhost:4173)
 
 `dist/` 폴더만 정적 호스팅에 올리면 됩니다 (`base: './'`, Hash 라우팅 — 서버 설정 불필요).
 
-### 현재 운영 중 배포 (교사용)
+### 현재 운영 중 배포
 
-- **주소**: https://parkdongbae.github.io/invention-teacher/
-- **저장소**: `Parkdongbae/invention-teacher` (main 브랜치 = 교사용 빌드 결과)
+- **교사용**: https://invention-teacher.vercel.app/
+- **학생용**: https://invention-ecru.vercel.app/
 
-재배포(업데이트) 절차:
+재배포(업데이트) 절차 — GitHub 저장소에 푸시하면 Vercel이 자동 배포합니다:
 
 ```powershell
 cd app; npm run build:teacher; cd ..
@@ -62,15 +62,16 @@ git add -A; git commit -m "deploy: 교사용 빌드"; git push origin main
 
 - **기타 정적 호스팅**: dist 폴더 업로드 (학생용·교사용 빌드 선택은 `npm run build` / `build:teacher`)
 
-### ⚠️ 초대 링크·QR은 반드시 배포 주소로
+### ⚠️ 초대 링크·QR은 반드시 학생용 주소로
 
 학생 초대 QR은 앱을 연 **주소를 그대로** 담습니다. 교사용 exe(127.0.0.1:4174)나 localhost에서
 QR을 만들면 학생 기기에서 「사이트에 접근할 수 없음」이 됩니다.
 
-1. 위 **운영 중 배포 주소**에서 교사용을 열어 QR을 만들거나,
-   exe를 쓸 경우 교사용 「⚙️ 학급 설정」의 **🌐 학생 접속 주소**에 배포 주소를 넣고 저장
-   → QR·초대 링크가 자동으로 배포 주소로 생성됩니다.
-2. 학생 접속 주소가 비어 있고 교사 컴퓨터 주소(localhost·127.0.0.1)에서 QR을 만들면
+1. 교사용 exe에서 QR을 만들 때는 「⚙️ 학급 설정」의 **🌐 학생 접속 주소**에
+   **학생용 주소**(`https://invention-ecru.vercel.app/`)를 넣고 저장
+   → QR·초대 링크가 자동으로 학생용 주소로 생성됩니다.
+2. 인터넷 배포 주소(교사용 Vercel 주소 등)에서 교사용을 열어 QR을 만들어도 됩니다.
+3. 학생 접속 주소가 비어 있고 교사 컴퓨터 주소(localhost·127.0.0.1)에서 QR을 만들면
    초대 카드 상단에 경고가 표시됩니다.
 
 학생 데이터는 **각 기기 브라우저(LocalStorage)에 저장**됩니다. 백업은 프로필 페이지의 "모든 데이터 내보내기(JSON)".
